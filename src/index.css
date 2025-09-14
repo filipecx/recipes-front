@@ -4,3 +4,14 @@
   padding: 2rem;
   text-align: center;
 }
+
+.ListModal {
+  color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  padding: 4rem;
+  border-style: 8px;
+}
