@@ -15,16 +15,16 @@ export function ListsContainer() {
   const [isAddRecipeOpen, setAddRecipesOpen] = useState(false)
 
   //make a get here. Shoud i get the lists and the recipes names in the same request?
-  const data = {title: "Base List", description: "A standart list for your recipies" }
+  const data = {title: "Base List", description: "" }
   const fetchLists = async () => {
     try {
-      const response = await Axios.get(`http://localhost:3000`)
-      setLists(lists)
+      const response = await Axios.get(`http://localhost:8080/recipeslist`)
+      setLists(response.data)
     } catch(error) {
       console.log(error)
     }
   }
-  
+
   useEffect(() => {
   //  setLists(lists => [...lists, data])
     fetchLists()
@@ -41,11 +41,10 @@ export function ListsContainer() {
             return (        
               <div>
                 <div  onClick={() => setExpansion(!isExpanded)}>
-                  <ListCard title={list.title} description={list.description}/>
+                  <ListCard title={list.name} description={list.description} listId={list.id} key={list.id} isExpanded={isExpanded}/>
                 </div>
                 <button onClick={() => setAddRecipesOpen(!isAddRecipeOpen)} type="button">{isAddRecipeOpen ? <p>X</p> : <p>Add Recipe</p>}</button>
                 <AddRecipeModal isAddRecepiOpen={isAddRecipeOpen} />
-                {isExpanded ? recipes.map((recipe) => <Link to={`/recipe`}><RecipeCard recipeTitle={recipe} /> </Link> ): "Click to expand"}
               </div>
           )
           })
