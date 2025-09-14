@@ -7,6 +7,7 @@ import { Register } from "./pages/Register";
 import { RecipesLists } from "./pages/RecipesLists";
 import { Route, Routes } from "react-router-dom";
 import { RecipeComplete } from "./components/RecipeComplete";
+import { Recipe } from "./pages/Recipe";
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" exact element={ <RecipesLists /> } />
-        <Route path="/recipe" element={ <RecipeComplete /> } />
+        <Route path="/recipe/:recipeId" element={ <Recipe /> } />
       </Routes>
     </>
   );

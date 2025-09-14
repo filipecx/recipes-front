@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { RecipeCard } from "./RecipeCard";
 
 export function ListCard ({title, description, listId, isExpanded}) {
@@ -18,7 +18,7 @@ export function ListCard ({title, description, listId, isExpanded}) {
     return (
         <div onClick={fetchRecipes}>
           <h2 className="text-xl font-semibold">{title}</h2>
-          {isExpanded ? recipes.map((recipe) => <Link to={`/recipe`}><RecipeCard recipeTitle={recipe.name} key={recipe.id}/> </Link> ): "Click to expand"
+          {isExpanded ? recipes.map((recipe) => <Link to={`/recipe/${recipe.id}`}><RecipeCard recipeTitle={recipe.name} key={recipe.id} recipeId={recipe.id}/> </Link> ): "Click to expand"
           }
 
         </div>
