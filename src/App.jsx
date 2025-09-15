@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import { RecipeComplete } from "./components/RecipeComplete";
 import { Recipe } from "./pages/Recipe";
 
+
 function App() {
 
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={ <RecipesLists /> } />
         <Route path="/recipe/:recipeId" element={ <Recipe /> } />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );

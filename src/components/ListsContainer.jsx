@@ -26,7 +26,7 @@ export function ListsContainer() {
   }
 
   useEffect(() => {
-  //  setLists(lists => [...lists, data])
+    setLists(lists => [...lists, data])
     fetchLists()
   }, [])
 
@@ -51,7 +51,7 @@ export function ListsContainer() {
         }
         <div onClick={() => setAddListOpen(!isAddListOpen)}>
           
-          { isAddListOpen ? <p>X</p> : <p>Add List</p>}
+          { isAddListOpen ? <p>xxxxxxxxxxxxxX</p> : <p>Add List</p>}
         </div>
         <AddListModal isOpen={isAddListOpen}/>
         
