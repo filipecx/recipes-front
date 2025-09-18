@@ -9,10 +9,8 @@ import Axios from "axios";
 
 export function ListsContainer() {
   const [lists, setLists] = useState([])
-  const [recipes, setRecipes] = useState(["recipe 1", "recipe 2"])
-  const [isExpanded, setExpansion] = useState(false)
+  const [expandedListId, setExpandedListId] = useState(null)
   const [isAddListOpen, setAddListOpen] = useState(false)
-  const [isAddRecipeOpen, setAddRecipesOpen] = useState(false)
 
   //make a get here. Shoud i get the lists and the recipes names in the same request?
   const data = {title: "Base List", description: "" }
@@ -23,6 +21,20 @@ export function ListsContainer() {
     } catch(error) {
       console.log(error)
     }
+  }
+
+  const removeList = async (listId) => {
+    const oldData = [...lists]
+    const newArray = lists.filter((list) => list.id != listId)
+    setLists(newArray)
+
+    try {
+      const response = await Axios.delete(`http://localhost:8080/recipeslist/${listId}`, {withCredentials: true})
+    } catch(e) {
+      console.error("Failed to delete list", error)
+      setLists(oldData)
+    }
+    
   }
 
   useEffect(() => {
@@ -40,11 +52,12 @@ export function ListsContainer() {
           lists.map((list) => {
             return (        
               <div>
-                <div  onClick={() => setExpansion(!isExpanded)}>
-                  <ListCard title={list.name} description={list.description} listId={list.id} key={list.id} isExpanded={isExpanded}/>
-                </div>
-                <button onClick={() => setAddRecipesOpen(!isAddRecipeOpen)} type="button">{isAddRecipeOpen ? <p>X</p> : <p>Add Recipe</p>}</button>
-                <AddRecipeModal isAddRecepiOpen={isAddRecipeOpen} />
+                  <ListCard 
+                  title={list.name} 
+                  description={list.description} 
+                  listId={list.id} key={list.id}
+                  removeList={removeList} 
+                  isExpanded={expandedListId === list.id}/>                
               </div>
           )
           })

@@ -1,3 +1,4 @@
+
 export function RecipeComplete( {name, ingredients, steps, listId, description}) {
     return (
         <div>
@@ -24,6 +25,7 @@ export function RecipeComplete( {name, ingredients, steps, listId, description})
                     )
                 })
             }
+            
         </div>
     )
 }

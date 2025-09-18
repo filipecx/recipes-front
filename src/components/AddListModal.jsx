@@ -4,13 +4,14 @@ import { useState } from "react";
 
 export function AddListModal({isOpen}) {
 
-    const [formData, setFormData] = useState()
+
+    const [listName, setListName] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         
         try {
-            await Axios.post("http://localhost:8080/recipeslist", {"name": "Insominia"}, {
+            await Axios.post("http://localhost:8080/recipeslist", {name: listName}, {
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -32,7 +33,7 @@ export function AddListModal({isOpen}) {
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="">
                         List name 
-                    <input type="text"  onChange={(e) => setFormData(e.target.value)}/>
+                    <input type="text"  onChange={(e) => setListName(e.target.value)}/>
                     </label>
 
                     <button type="submit">Add list</button>

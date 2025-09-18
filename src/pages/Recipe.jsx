@@ -37,7 +37,7 @@ export function Recipe() {
              description={recipe.description}
              steps={recipe.steps} 
              listId={recipe.listId}/>}
-            
+            <Link to={`/editRecipe/${recipe.id}`}><button type="button" >Edit recipe</button></Link>
         </div>
     )
 }

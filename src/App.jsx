@@ -8,6 +8,7 @@ import { RecipesLists } from "./pages/RecipesLists";
 import { Route, Routes } from "react-router-dom";
 import { RecipeComplete } from "./components/RecipeComplete";
 import { Recipe } from "./pages/Recipe";
+import { EditRecipe } from "./pages/EditRecipe";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={ <RecipesLists /> } />
         <Route path="/recipe/:recipeId" element={ <Recipe /> } />
+        <Route path="/editRecipe/:recipeId" element={ <EditRecipe />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </>
