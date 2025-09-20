@@ -3,6 +3,8 @@ import { useState } from "react"
 import { FormInput } from "./FormInput"
 
 export function AddRecipeModal({ isAddRecipeOpen, listId }) {
+
+    const [error, setError] = useState('')
     const [name, setName] = useState("")
 
     const [ingredientData, setIngredientData] = useState({name: "", quantity: ""})
@@ -33,7 +35,19 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(listId)
+        const recipeInfo = {
+            name: name, 
+            ingredients: arrayOfIngredients,
+            steps: arrayOfSteps,
+            description: description
+        }
+        const isEmpty = Object.values(recipeInfo).some(value => value === "")
+
+        if (isEmpty) {
+            setError("All field must be filled")
+            return 
+        }
+
         try {
             const response = await Axios.post(`http://localhost:8080/recipes`, {
                 name: name,
@@ -51,6 +65,10 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
             console.error(error, "Failed to add recipe")
         }
         
+    }
+
+    const handleError = async (e) => {
+
     }
 
     
@@ -162,6 +180,7 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
                         value={description.time} 
                         onChange={(e) => setDescription({...description, time: e.target.value})}/>
                     </label>
+                    {error && <p className="text-red-500">{error}</p>}
                     <button 
                     className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
                     type="submit">Add Recipe</button>

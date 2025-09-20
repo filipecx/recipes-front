@@ -42,8 +42,8 @@ export function ListsContainer() {
   }, [])
 
   return (
-    <div className="w-full max-w-md mx-auto my-4 p-4 cursor-pointer">
-      <div className="flex-col justify-start">
+    <div className="w-full max-w-md mx-auto my-4 p-4">
+      <div className="flex-col">
         {
           lists.map((list) => {
             return (        
@@ -51,16 +51,20 @@ export function ListsContainer() {
                   <ListCard 
                   title={list.name} 
                   description={list.description} 
-                  listId={list.id} key={list.id}
+                  listId={list.id} 
+                  key={list.id}
                   removeList={removeList} 
-                  isExpanded={expandedListId === list.id}/>                
+                  isExpanded={expandedListId === list.id}
+                  lists={lists}
+                  setLists={setLists}     
+                  />           
               </div>
           )
           })
         }
         <div onClick={() => setAddListOpen(!isAddListOpen)}>
           
-          { isAddListOpen ? <p>xxxxxxxxxxxxxX</p> : <button type="button" className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600">Add List</button>}
+          { isAddListOpen ? <button type="button" className="my-4">X</button> : <button type="button" className="my-4 cursor-pointer w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600">Add List</button>}
         </div>
         <AddListModal isOpen={isAddListOpen}/>
         

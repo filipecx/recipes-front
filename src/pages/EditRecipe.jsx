@@ -4,6 +4,8 @@ import Axios from 'axios'
 import { Link } from "react-router";
 
 export function EditRecipe () {
+    const [error, setError] = useState('')
+    
     const [recipeForm, setRecipeForm] = useState({
         name: '',
         ingredients: [{name: '', quantity: ''}],
@@ -31,6 +33,19 @@ export function EditRecipe () {
 
     const sendChanges = async (e) => {
         e.preventDefault()
+
+        const recipeInfo = {
+            name: recipeForm.name, 
+            ingredients: arrayOfIngredients,
+            steps: arrayOfSteps,
+            description: recipeForm.description
+        }
+        const isEmpty = Object.values(recipeInfo).some(value => value === "")
+
+        if (isEmpty) {
+            setError("All field must be filled")
+            return 
+        }
 
         try {
             const response = await Axios.put(`http://localhost:8080/recipes/recipe/${recipeId}`, {
@@ -93,12 +108,18 @@ export function EditRecipe () {
 
     return (
         
-        <>
+        <div className="flex h-screen bg-secondary justify-center ">
             <Link to={"/"}>Home</Link>
-                <form onSubmit={sendChanges}>
+                <form className="w-4/5 max-w-md space-y-6" onSubmit={sendChanges}>
                     <label htmlFor="">
                         <p>Recipe Title</p>
-                        <input type="text" name="name" value={recipeForm.name} onChange={(e) => setRecipeForm({...recipeForm, name: e.target.value})}/>
+                        <input
+                        required 
+                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
+                        type="text" 
+                        name="name" 
+                        value={recipeForm.name} 
+                        onChange={(e) => setRecipeForm({...recipeForm, name: e.target.value})}/>
                     </label>
                     <label htmlFor="">
                         <p>Ingredients</p>
@@ -107,15 +128,31 @@ export function EditRecipe () {
                             return (
                                 <div key={index}>
                                     <label name="ingredient_name">Ingredient</label>
-                                    <input type="text" value={ingredient.name} name='name' onChange={(e) => handleChange(e, index, arrayOfIngredients)}/>
+                                    <input 
+                                    required
+                                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
+                                    type="text" 
+                                    value={ingredient.name}
+                                    name='name' 
+                                    onChange={(e) => handleChange(e, index, arrayOfIngredients)}/>
                                     <label name="ingredient_quantity">Quantity</label>
-                                    <input type="text" value={ingredient.quantity} name='quantity' onChange={(e) => handleChange(e, index, arrayOfIngredients)} />
-                                    <button type="button" onClick={() => removeField(index)}>Remove field</button>        
+                                    <input 
+                                    required
+                                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
+                                    type="text" 
+                                    value={ingredient.quantity} 
+                                    name='quantity' 
+                                    onChange={(e) => handleChange(e, index, arrayOfIngredients)} />
+                                    <button 
+                                    className="w-full bg-red-200 text-white my-2 py-2 rounded-lg hover:bg-red-600" 
+                                    type="button" onClick={() => removeField(index)}>Remove field</button>        
                                 </div>
                             )
                         })
                     }
-                    <button type="button" onClick={addIngredientInput}>Add another ingredient</button> 
+                    <button 
+                    className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
+                    type="button" onClick={addIngredientInput}>Add another ingredient</button> 
                     </label> 
                     
                         
@@ -127,25 +164,57 @@ export function EditRecipe () {
                                 return (
                                     <div key={index}>
                                         <label name="text"></label>
-                                        <input type="text" value={step.text} name="text" onChange={(e) => handleChange(e, index, arrayOfSteps)}/>                                     
+                                        <input 
+                                        required
+                                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
+                                        type="text"
+                                        value={step.text}
+                                        name="text" 
+                                        onChange={(e) => handleChange(e, index, arrayOfSteps)}/>                                     
                                     </div>
                                 )
                             })
                         }
-                        <button type="button" onClick={addStepInput}>Add step</button>
-                        <button type="button" onClick={removeLastStep}>Remove last step</button>
+                        <button 
+                        className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
+                        type="button" onClick={addStepInput}>Add step</button>
+                        <button
+                        className="w-full bg-red-200 text-white py-2 rounded-lg hover:bg-red-600" 
+                        type="button" onClick={removeLastStep}>Remove last step</button>
                        
                    
                     <label htmlFor="">Description</label>
                     {/* changin state of nested object */}
-                    <input type="text" name="text" value={recipeForm.description.text} onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, text: e.target.value}})}/>
-                    <label htmlFor="">Servings</label>
-                    <input type="text" name="makes" value={recipeForm.description.makes} onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, makes: e.target.value}})}/>
-                    <label htmlFor="">Total time</label>
-                    <input type="text" name="time" value={recipeForm.description.time} onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, time: e.target.value}})}/>
+                    <input 
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
+                    type="text" 
+                    name="text" 
+                    value={recipeForm.description.text} 
+                    onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, text: e.target.value}})}/>
                     
-                    <button type="submit">Edit Recipe</button>
+                    <label htmlFor="">Servings</label>
+                    <input 
+                    required
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
+                    type="text" 
+                    name="makes" 
+                    value={recipeForm.description.makes} 
+                    onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, makes: e.target.value}})}/>
+                    
+                    <label htmlFor="">Total time</label>
+                    <input 
+                    required
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
+                    type="text" 
+                    name="time" 
+                    value={recipeForm.description.time} 
+                    onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, time: e.target.value}})}/>
+                    
+                    {error && <p className="text-red-500">{error}</p>}
+                    <button
+                    className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
+                    type="submit">Edit Recipe</button>
                 </form>
-            </>
+            </div>
     )
 }
