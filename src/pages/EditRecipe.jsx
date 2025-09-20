@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Axios from 'axios'
+import { Link } from "react-router";
 
 export function EditRecipe () {
     const [recipeForm, setRecipeForm] = useState({
@@ -93,6 +94,7 @@ export function EditRecipe () {
     return (
         
         <>
+            <Link to={"/"}>Home</Link>
                 <form onSubmit={sendChanges}>
                     <label htmlFor="">
                         <p>Recipe Title</p>

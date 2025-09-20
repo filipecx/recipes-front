@@ -2,8 +2,8 @@ import { ListsContainer } from "../components/ListsContainer";
 
 export function RecipesLists() {
   return (
-    <div className="p-6 grid gap-4">
-      <h1>Your recipes</h1>
+    <div className="flex-col">
+      <h1 className="text-2xl font-bold text-gray-800">Your recipes</h1>
       <ListsContainer />
     </div>
   );

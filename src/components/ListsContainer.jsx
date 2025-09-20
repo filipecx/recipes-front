@@ -24,17 +24,16 @@ export function ListsContainer() {
   }
 
   const removeList = async (listId) => {
-    const oldData = [...lists]
-    const newArray = lists.filter((list) => list.id != listId)
-    setLists(newArray)
+  const oldData = [...lists]
+  const newArray = lists.filter((list) => list.id != listId)
+  setLists(newArray)
 
-    try {
-      const response = await Axios.delete(`http://localhost:8080/recipeslist/${listId}`, {withCredentials: true})
-    } catch(e) {
+  try {
+    const response = await Axios.delete(`http://localhost:8080/recipeslist/${listId}`, {withCredentials: true})
+  } catch(e) {
       console.error("Failed to delete list", error)
       setLists(oldData)
     }
-    
   }
 
   useEffect(() => {
@@ -44,10 +43,7 @@ export function ListsContainer() {
 
   return (
     <div className="w-full max-w-md mx-auto my-4 p-4 cursor-pointer">
-      <div
-        className="flex justify-between items-center"
-        
-      >
+      <div className="flex-col justify-start">
         {
           lists.map((list) => {
             return (        
@@ -64,7 +60,7 @@ export function ListsContainer() {
         }
         <div onClick={() => setAddListOpen(!isAddListOpen)}>
           
-          { isAddListOpen ? <p>xxxxxxxxxxxxxX</p> : <p>Add List</p>}
+          { isAddListOpen ? <p>xxxxxxxxxxxxxX</p> : <button type="button" className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600">Add List</button>}
         </div>
         <AddListModal isOpen={isAddListOpen}/>
         

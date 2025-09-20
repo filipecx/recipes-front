@@ -27,7 +27,7 @@ export function Recipe() {
     }, [])
 
     return (
-        <div>
+        <div  className="flex flex-col h-screen bg-secondary">
             <Link to={"/"}>Voltar</Link>
             {recipe.ingredients &&
              <RecipeComplete 
