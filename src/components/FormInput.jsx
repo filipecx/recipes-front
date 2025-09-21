@@ -1,13 +1,11 @@
-export function FormInput({input_name, input_value, setIngredientData, ingredientData}) {
+export function FormInput({input_name, input_value, setRecipeData, recipeData, property}) {
     return (
         <input 
             className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
             type="text" 
-            name="ingredient_name" 
-            value={ingredientData.name} 
-            
-            onChange={(e) => setIngredientData({...ingredientData, name: e.target.value})} 
-            
+            name={input_name} 
+            value={input_value}           
+            onChange={(e) => setRecipeData({...recipeData, [property]: e.target.value})}           
             />
     )
 }

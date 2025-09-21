@@ -1,6 +1,7 @@
 import  Axios  from "axios"
 import { useState } from "react"
 import { FormInput } from "./FormInput"
+import { useNavigate } from "react-router"
 
 export function AddRecipeModal({ isAddRecipeOpen, listId }) {
 
@@ -97,24 +98,49 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
                             )
                         })
                     }   
+
+                    
                     <label htmlFor="" className="block text-sm font-medium text-gray-700">Ingredient
+
+                        <FormInput 
+                        input_name={"ingredient_name"}
+                        input_value={ingredientData.name}
+                        setRecipeData={setIngredientData}
+                        recipeData={ingredientData}
+                        property={"name"}
                         
+                    />
+                      {/* 
                         <input 
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
                         type="text" 
                         name="ingredient_name" 
                         value={ingredientData.name} 
                         onChange={(e) => setIngredientData({...ingredientData, name: e.target.value})} />
+                        */}  
+                        </label>
                         
-                        </label> 
                     <label htmlFor="" className="block text-sm font-medium text-gray-700">Quantity
+
+                        
+                    {/*
                         <input 
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
                         type="text" 
                         name="ingredient_quantity" 
                         value={ingredientData.quantity} 
                         onChange={(e) => setIngredientData({...ingredientData, quantity: e.target.value})} />    
+
+                        */}  
                     </label>
+                    <FormInput 
+                        input_name={"ingredient_quantity"}
+                        input_value={ingredientData.quantity}
+                        setRecipeData={setIngredientData}
+                        recipeData={ingredientData}
+                        property={"quantity"}
+                        
+                    />
 
                     <button 
                     className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
@@ -159,13 +185,31 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
                     
                     <label htmlFor="" className="block text-sm font-medium text-gray-700">
                         <p>Description</p>
+                        <FormInput 
+                        input_name={"text"}
+                        input_value={description.text}
+                        setRecipeData={setDescription}
+                        recipeData={description}
+                        property={"text"}
+                        
+                    />
+                    {/*
                         <input 
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
                         type="text" 
                         name="text" 
                         value={description.text} 
                         onChange={(e) => setDescription({...description, text: e.target.value})}/>
+                        */}
                         <p>Servings</p>
+                        <FormInput 
+                        input_name={"makes"}
+                        input_value={description.makes}
+                        setRecipeData={setDescription}
+                        recipeData={description}
+                        property={"makes"}
+                        />
+                        {/*
                         <input 
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
                         type="text" 
@@ -179,6 +223,14 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
                         name="time" 
                         value={description.time} 
                         onChange={(e) => setDescription({...description, time: e.target.value})}/>
+                        */}
+                        <FormInput 
+                        input_name={"time"}
+                        input_value={description.time}
+                        setRecipeData={setDescription}
+                        recipeData={description}
+                        property={"time"}
+                        />
                     </label>
                     {error && <p className="text-red-500">{error}</p>}
                     <button 

@@ -28,6 +28,9 @@ export function RecipeComplete( {name, ingredients, steps, listId, description})
                     )
                 })
             }
+            <p>{description.text}</p>
+            <p>{description.makes}</p>
+            <p>{description.time}</p>
             
         </div>
     )

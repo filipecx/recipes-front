@@ -31,8 +31,6 @@ export function ListCard ({title, description, listId, isExpanded, removeList}) 
     } catch(error) {
       console.error("Not able to remove recipe", error)
     }
-
-
   }
 
   
