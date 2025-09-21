@@ -3,7 +3,7 @@ import { useState } from "react"
 import { FormInput } from "./FormInput"
 import { useNavigate } from "react-router"
 
-export function AddRecipeModal({ isAddRecipeOpen, listId }) {
+export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeModal, setRecipes, recipes }) {
 
     const [error, setError] = useState('')
     const [name, setName] = useState("")
@@ -49,6 +49,8 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
             return 
         }
 
+        setRecipes([{...recipes, recipeInfo}])
+
         try {
             const response = await Axios.post(`http://localhost:8080/recipes`, {
                 name: name,
@@ -61,7 +63,7 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
                 headers: {"Content-Type": "application/json"}, withCredentials: true
             }
             )
-            console.log(response.data)
+            setExpandedAddRecipeModal("")
         } catch (error) {
             console.error(error, "Failed to add recipe")
         }
@@ -193,14 +195,7 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
                         property={"text"}
                         
                     />
-                    {/*
-                        <input 
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
-                        type="text" 
-                        name="text" 
-                        value={description.text} 
-                        onChange={(e) => setDescription({...description, text: e.target.value})}/>
-                        */}
+                    
                         <p>Servings</p>
                         <FormInput 
                         input_name={"makes"}
@@ -209,21 +204,9 @@ export function AddRecipeModal({ isAddRecipeOpen, listId }) {
                         recipeData={description}
                         property={"makes"}
                         />
-                        {/*
-                        <input 
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
-                        type="text" 
-                        name="makes" 
-                        value={description.makes} 
-                        onChange={(e) => setDescription({...description, makes: e.target.value})}/>
+                       
                         <p>Total time</p>
-                        <input 
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
-                        type="text" 
-                        name="time" 
-                        value={description.time} 
-                        onChange={(e) => setDescription({...description, time: e.target.value})}/>
-                        */}
+                        
                         <FormInput 
                         input_name={"time"}
                         input_value={description.time}

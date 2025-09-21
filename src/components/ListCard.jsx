@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { RecipeCard } from "./RecipeCard";
 import { AddRecipeModal } from "./AddRecipeModal";
+import { FaRegTrashAlt, FaEdit, FaRegWindowClose    } from "react-icons/fa"
 
 export function ListCard ({title, description, listId, isExpanded, removeList}) {
 
@@ -50,21 +51,21 @@ export function ListCard ({title, description, listId, isExpanded, removeList}) 
             </div>
             
             <div className="flex justify-end">
-              <button type="button" onClick={() => removeList(listId)}>Remove</button>
-              <button type="button">edit</button>
+              <button type="button" className="px-6" onClick={() => removeList(listId)}><FaRegTrashAlt /></button>
+              <button type="button"><FaEdit /></button>
             </div>
             </div>
             <div>
               {
               expandedListId === listId ? <div>{recipes.map((recipe) => {
                 return(
-                  <div className="flex justify-between px-2 py-4 border border-green-500 bg-green-500 rounded-md my-4">
+                  <div className="flex justify-between px-2 py-4 border border-green-500 bg-green-500 rounded-md my-4 text-gray-50 font-semibold">
                     <div >
                       <Link to={`/recipe/${recipe.id}`}><RecipeCard recipeTitle={recipe.name} key={recipe.id} recipeId={recipe.id}/> </Link>
                     </div>
                     <div className="flex justify-around">
-                      <button className="px-6" type="button" onClick={() => removeRecipe(recipe.id)}>R</button>
-                      <Link to={`/editRecipe/${recipe.id}`}><button type="button" >E</button></Link>
+                      <button className="px-6" type="button" onClick={() => removeRecipe(recipe.id)}><FaRegTrashAlt /></button>
+                      <Link to={`/editRecipe/${recipe.id}`}><button type="button" ><FaEdit /></button></Link>
                     </div>
                   </div>
 
@@ -72,8 +73,18 @@ export function ListCard ({title, description, listId, isExpanded, removeList}) 
 
             })
             }
-            <button onClick={() => setExpandedAddRecipeModal(expandedAddRecipeModal => !expandedAddRecipeModal)} type="button">{expandedAddRecipeModal ? <p>X</p> : <p>Add Recipe</p>}</button>
-            <AddRecipeModal isAddRecipeOpen={expandedAddRecipeModal} listId={listId} />
+            <button 
+            onClick={() => setExpandedAddRecipeModal(expandedAddRecipeModal => !expandedAddRecipeModal)} 
+            type="button"
+            className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
+            >
+            {expandedAddRecipeModal ? <div className="flex justify-center text-3xl"><FaRegWindowClose /></div> : <p>Add Recipe</p>}</button>
+            <AddRecipeModal 
+            isAddRecipeOpen={expandedAddRecipeModal} 
+            listId={listId} 
+            setRecipes={setRecipes} 
+            recipes={recipes} 
+            setExpandedAddRecipeModal={setExpandedAddRecipeModal}/>
             </div>: null
             }
             </div>
