@@ -25,7 +25,7 @@ export function ListCard ({title, description, listId, isExpanded, removeList, e
 
   const removeRecipe = async (recipeId) => {
     const oldData = [...recipes]
-    setRecipes(recipes.filter((recipe) => recipe.id === recipeId))
+    setRecipes(recipes.filter((recipe) => recipe.id !== recipeId))
 
     try {
       const response = await Axios.delete(`http://localhost:8080/recipes/recipe/${recipeId}`, {withCredentials: true})
