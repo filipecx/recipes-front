@@ -77,10 +77,10 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
     
     if (isAddRecipeOpen) {
         return (
-            <div className="flex h-screen bg-secondary justify-center">
+            <div className="flex h-screen bg-secondary justify-center text-base ">
                 <form className="space-y-6" onSubmit={handleSubmit}>
-                    <label htmlFor="" className="block text-sm font-medium text-gray-700">
-                        <p>Recipe Title</p>
+                    <label htmlFor="" className="block font-bold text-gray-700">
+                        <p className="mt-6">Recipe Title</p>
                         <input 
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
                         type="text" 
@@ -88,7 +88,7 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
                         value={name} 
                         onChange={(e) => setName(e.target.value)}/>
                     </label>
-                    <label htmlFor="" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="" className="block font-medium text-gray-700">
                         <p>Ingredients</p></label>
                     {
                         arrayOfIngredients && arrayOfIngredients.map((ingredient, index) => {
@@ -102,7 +102,7 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
                     }   
 
                     
-                    <label htmlFor="" className="block text-sm font-medium text-gray-700">Ingredient
+                    <label htmlFor="" className="block text-gray-700 font-bold">Ingredient
 
                         <FormInput 
                         input_name={"ingredient_name"}
@@ -112,29 +112,14 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
                         property={"name"}
                         
                     />
-                      {/* 
-                        <input 
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
-                        type="text" 
-                        name="ingredient_name" 
-                        value={ingredientData.name} 
-                        onChange={(e) => setIngredientData({...ingredientData, name: e.target.value})} />
-                        */}  
+                     
                         </label>
                         
-                    <label htmlFor="" className="block text-sm font-medium text-gray-700">Quantity
+                    <label htmlFor="" className="block font-medium text-gray-700">Quantity
 
                         
-                    {/*
-                        <input 
-                        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
-                        type="text" 
-                        name="ingredient_quantity" 
-                        value={ingredientData.quantity} 
-                        onChange={(e) => setIngredientData({...ingredientData, quantity: e.target.value})} />    
-
-                        */}  
-                    </label>
+                    
+                    
                     <FormInput 
                         input_name={"ingredient_quantity"}
                         input_value={ingredientData.quantity}
@@ -143,18 +128,24 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
                         property={"quantity"}
                         
                     />
-
-                    <button 
-                    className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
-                    type="button" 
-                    onClick={() => addIngredientDataToArray(ingredientData)}>Add ingredient</button>
+                    </label>
+                    <div className="flex gap-2">
+                        <button
+                            className="w-full bg-red-400 text-white py-2 rounded-lg font-semibold" 
+                            type="button" 
+                            onClick={removeLastIngredient}>Remove last ingredient
+                        </button>
+                        <button 
+                            className="w-full bg-emerald-600 text-white py-2 rounded-lg font-semibold"
+                            type="button" 
+                            onClick={() => addIngredientDataToArray(ingredientData)}>Add ingredient
+                        </button>
                     
-                    <button
-                    className="w-full bg-red-200 text-white py-2 rounded-lg hover:bg-red-600" 
-                    type="button" 
-                    onClick={removeLastIngredient}>Remove last ingredient</button>
+                        
+                    </div>
+                    
 
-                    <label htmlFor="" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="" className="block font-bold text-gray-700">
                         <p>Steps</p>
                         {
                             arrayOfSteps && arrayOfSteps.map((step, index) => {
@@ -174,18 +165,24 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
                     onChange={(e) => setStepData({...stepData, number: arrayOfSteps?.length + 1, text: e.target.value})}/>
                     </label>
 
-                    <button 
-                    className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
-                    type="button" 
-                    onClick={() => addStepDataToArray(stepData)}>Add step</button>
+                    <div className="flex gap-2">
 
-                    <button 
-                    className="w-full bg-red-200 text-white py-2 rounded-lg hover:bg-red-600"
-                    type="button" 
-                    onClick={removeLastStep}>Remove last step</button>
+                        <button 
+                        className="w-full bg-red-400 text-white py-2 rounded-lg font-semibold"
+                        type="button" 
+                        onClick={removeLastStep}>Remove last step</button>
+
+                        <button 
+                        className="w-full bg-emerald-600 text-white py-2 rounded-lg font-semibold"
+                        type="button" 
+                        onClick={() => addStepDataToArray(stepData)}>Add step</button>
+
+                        
+
+                    </div>
 
                     
-                    <label htmlFor="" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="" className="block font-bold text-gray-700">
                         <p>Description</p>
                         <FormInput 
                         input_name={"text"}
@@ -217,7 +214,7 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
                     </label>
                     {error && <p className="text-red-500">{error}</p>}
                     <button 
-                    className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
+                    className="w-full bg-black text-white py-2 rounded-lg font-semibold"
                     type="submit">Add Recipe</button>
                 </form>
             </div>
