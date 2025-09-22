@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { AddListModal } from "./AddListModal";
 import { AddRecipeModal } from "./AddRecipeModal";
 import Axios from "axios";
+import { FaRegWindowClose } from "react-icons/fa";
 
 
 export function ListsContainer() {
@@ -96,9 +97,12 @@ export function ListsContainer() {
           )
           })
         }
-        <div onClick={() => setAddListOpen(!isAddListOpen)}>
+        <div onClick={() => setAddListOpen(!isAddListOpen)} className="bg-black flex justify-center text-white p-4 rounded-lg"
+        >
           
-          { isAddListOpen ? <button type="button" className="my-4">X</button> : <button type="button" className="my-4 cursor-pointer w-full bg-black text-white py-2 rounded-lg font-semibold">Add List</button>}
+          { isAddListOpen ? 
+          <button type="button" className="flex text-3xl cursor-pointer"><FaRegWindowClose /></button> 
+          : <button type="button" className="my-4 cursor-pointer w-full bg-black text-white py-2 rounded-lg font-semibold">Add List</button>}
         </div>
         <AddListModal isOpen={isAddListOpen}/>
         
