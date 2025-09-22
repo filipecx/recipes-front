@@ -119,7 +119,7 @@ export function EditRecipe () {
             
                 <form className="w-4/5 max-w-md space-y-6" onSubmit={sendChanges}>
                     <label htmlFor="">
-                        <p>Recipe Title</p>
+                        <p className="font-bold">Recipe Title</p>
                         <input
                         required 
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
@@ -129,12 +129,12 @@ export function EditRecipe () {
                         onChange={(e) => setRecipeForm({...recipeForm, name: e.target.value})}/>
                     </label>
                     <label htmlFor="">
-                        <p>Ingredients</p>
+                        <p className="font-semibold">Ingredients</p>
                     {
                         arrayOfIngredients && arrayOfIngredients.map((ingredient, index) => {
                             return (
                                 <div key={index}>
-                                    <label name="ingredient_name">Ingredient</label>
+                                    <label name="ingredient_name" className="font-bold">Ingredient</label>
                                     <input 
                                     required
                                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
@@ -142,7 +142,7 @@ export function EditRecipe () {
                                     value={ingredient.name}
                                     name='name' 
                                     onChange={(e) => handleChange(e, index, arrayOfIngredients)}/>
-                                    <label name="ingredient_quantity">Quantity</label>
+                                    <label name="ingredient_quantity" className="font-bold">Quantity</label>
                                     <input 
                                     required
                                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
@@ -151,20 +151,20 @@ export function EditRecipe () {
                                     name='quantity' 
                                     onChange={(e) => handleChange(e, index, arrayOfIngredients)} />
                                     <button 
-                                    className="w-full bg-red-200 text-white my-2 py-2 rounded-lg hover:bg-red-600" 
+                                    className="w-full bg-red-400 text-white my-2 py-2 rounded-lg font-semibold" 
                                     type="button" onClick={() => removeField(index)}>Remove field</button>        
                                 </div>
                             )
                         })
                     }
                     <button 
-                    className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
+                    className="w-full bg-emerald-600 text-white py-2 mt-3 mb-12 rounded-lg font-semibold"
                     type="button" onClick={addIngredientInput}>Add another ingredient</button> 
                     </label> 
                     
                         
                     <label htmlFor="">
-                        <p>Steps</p>
+                        <p className="font-bold">Steps</p>
                     </label>
                         {
                             arrayOfSteps && arrayOfSteps.map((step, index) => {
@@ -182,15 +182,18 @@ export function EditRecipe () {
                                 )
                             })
                         }
-                        <button 
-                        className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
-                        type="button" onClick={addStepInput}>Add step</button>
-                        <button
-                        className="w-full bg-red-200 text-white py-2 rounded-lg hover:bg-red-600" 
-                        type="button" onClick={removeLastStep}>Remove last step</button>
+                        <div className="flex gap-2">
+                            <button 
+                            className="w-full bg-emerald-600 text-white py-2 rounded-lg font-semibold"
+                            type="button" onClick={addStepInput}>Add step</button>
+                            <button
+                            className="w-full bg-red-400 text-white py-2 rounded-lg hover:bg-red-600 font-semibold" 
+                            type="button" onClick={removeLastStep}>Remove last step</button>
+                        </div>
+                        
                        
                    
-                    <label htmlFor="">Description</label>
+                    <label htmlFor="" className="font-bold">Description</label>
                     {/* changin state of nested object */}
                     <input 
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
@@ -199,7 +202,7 @@ export function EditRecipe () {
                     value={recipeForm.description.text} 
                     onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, text: e.target.value}})}/>
                     
-                    <label htmlFor="">Servings</label>
+                    <label htmlFor="" className="font-bold">Servings</label>
                     <input 
                     required
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
@@ -208,7 +211,7 @@ export function EditRecipe () {
                     value={recipeForm.description.makes} 
                     onChange={(e) => setRecipeForm({...recipeForm, description: {...recipeForm.description, makes: e.target.value}})}/>
                     
-                    <label htmlFor="">Total time</label>
+                    <label htmlFor="" className="font-bold">Total time</label>
                     <input 
                     required
                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2  focus:ring-green-500`}
@@ -219,7 +222,7 @@ export function EditRecipe () {
                     
                     {error && <p className="text-red-500">{error}</p>}
                     <button
-                    className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600"
+                    className="w-full bg-black text-white py-2 rounded-lg font-semibold"
                     type="submit">Edit Recipe</button>
                 </form>
             </div>
