@@ -42,7 +42,7 @@ export function ListCard ({title, description, listId, isExpanded, removeList, e
   }, [recipes])
 
     return (
-      <div className="flex-col shadow-lg rounded-xl p-4">
+      <div className="flex-col shadow-md rounded-xl p-4">
           <div className="flex justify-between">
             {/* for the time being, the trigger to open and close the list will be at the title, later, on a div*/}
             <div >
@@ -60,7 +60,7 @@ export function ListCard ({title, description, listId, isExpanded, removeList, e
               {
               expandedListId === listId ? <div>{recipes.map((recipe) => {
                 return(
-                  <div className="flex justify-between px-2 py-4 border border-green-500 bg-green-500 rounded-md my-4 text-gray-50 font-semibold">
+                  <div className="flex justify-between px-2 py-4 border bg-gray-600 rounded-md my-4 text-gray-50 font-semibold">
                     <div >
                       <Link to={`/recipe/${recipe.id}`}><RecipeCard recipeTitle={recipe.name} key={recipe.id} recipeId={recipe.id}/> </Link>
                     </div>
@@ -77,7 +77,7 @@ export function ListCard ({title, description, listId, isExpanded, removeList, e
             <button 
             onClick={() => setExpandedAddRecipeModal(expandedAddRecipeModal => !expandedAddRecipeModal)} 
             type="button"
-            className="w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600 cursor-pointer"
+            className="w-full bg-black text-white font-semibold py-2 rounded-lg cursor-pointer"
             >
             {expandedAddRecipeModal ? <div className="flex justify-center text-3xl cursor-pointer"><FaRegWindowClose /></div> : <p>Add Recipe</p>}</button>
             <AddRecipeModal 

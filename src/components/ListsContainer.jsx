@@ -76,7 +76,7 @@ export function ListsContainer() {
 
   return (
     <div className="w-full max-w-md mx-auto my-4 p-4">
-      <div className="flex-col">
+      <div className="flex flex-col gap-y-6">
         {
           lists.map((list) => {
             return (        
@@ -98,7 +98,7 @@ export function ListsContainer() {
         }
         <div onClick={() => setAddListOpen(!isAddListOpen)}>
           
-          { isAddListOpen ? <button type="button" className="my-4">X</button> : <button type="button" className="my-4 cursor-pointer w-full bg-green-200 text-white py-2 rounded-lg hover:bg-green-600">Add List</button>}
+          { isAddListOpen ? <button type="button" className="my-4">X</button> : <button type="button" className="my-4 cursor-pointer w-full bg-black text-white py-2 rounded-lg font-semibold">Add List</button>}
         </div>
         <AddListModal isOpen={isAddListOpen}/>
         
