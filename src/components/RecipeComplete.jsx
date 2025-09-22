@@ -1,5 +1,9 @@
+import { useState } from "react"
+import { Ingredient } from "./Ingredient"
+import { Step } from "./Step"
 
 export function RecipeComplete( {name, ingredients, steps, listId, description}) {
+    const [checked, setChecked] = useState([])
     return (
         <div className="flex flex-col gap-y-6">
             <h1 className="text-2xl font-bold text-gray-800">{name}</h1>
@@ -26,10 +30,7 @@ export function RecipeComplete( {name, ingredients, steps, listId, description})
                 {
                     ingredients.map((ingredient) => {
                     return (
-                        <div className="flex justify-between" key={ingredient.id}>
-                            <p>{ingredient.name}</p>
-                            <p>{ingredient.quantity}</p>
-                        </div>
+                        <Ingredient name={ingredient.name} quantity={ingredient.quantity} id={ingredient.id}/>
                     )
                     })
                 
@@ -44,10 +45,7 @@ export function RecipeComplete( {name, ingredients, steps, listId, description})
                 {
                     steps.map((step) => {
                         return (
-                            <div className="flex justify-normal gap-x-2" key={step.id}>
-                                <p>{step.number}</p>
-                                <p> {step.text}</p>
-                            </div>
+                            <Step number={step.number} text={step.text} key={step.id}/>
                         )
                     })
                 }
