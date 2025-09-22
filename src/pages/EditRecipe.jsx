@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Axios from 'axios'
 import { Link } from "react-router";
+import { FaHome } from "react-icons/fa";
 
 export function EditRecipe () {
     const navigate = useNavigate()
@@ -111,8 +112,11 @@ export function EditRecipe () {
 
     return (
         
-        <div className="flex h-screen bg-secondary justify-center ">
-            <Link to={"/"}>Home</Link>
+        <div className="flex flex-col  w-full max-w-md mx-auto">
+            <div><Link to={"/"} className="text-4xl"><FaHome /></Link></div>
+            <div>
+
+            
                 <form className="w-4/5 max-w-md space-y-6" onSubmit={sendChanges}>
                     <label htmlFor="">
                         <p>Recipe Title</p>
@@ -219,5 +223,7 @@ export function EditRecipe () {
                     type="submit">Edit Recipe</button>
                 </form>
             </div>
+
+        </div>
     )
 }
