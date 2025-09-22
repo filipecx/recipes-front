@@ -49,7 +49,7 @@ export function AddRecipeModal({ isAddRecipeOpen, listId, setExpandedAddRecipeMo
             return 
         }
 
-        setRecipes([{...recipes, recipeInfo}])
+        setRecipes([...recipes, recipeInfo])
 
         try {
             const response = await Axios.post(`http://localhost:8080/recipes`, {
