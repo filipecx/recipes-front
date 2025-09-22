@@ -1,10 +1,28 @@
 
 export function RecipeComplete( {name, ingredients, steps, listId, description}) {
     return (
-        <div className="w-full max-w-md mx-auto my-4 p-4 cursor-pointer flex flex-col shadow-lg rounded-xl" >
+        <div className="flex flex-col gap-y-6">
             <h1 className="text-2xl font-bold text-gray-800">{name}</h1>
-            <div className="flex justify-end flex-col">
-                <h2>Ingredients: </h2>
+            <div className="flex flex-col">
+                <div className="flex">
+                    <p className="font-semibold text-lg">Description: </p>
+                </div>
+                <div className="flex content-start">
+                    <p>{description.text}</p>
+                </div>
+                <div className="flex">
+                    <p>Makes: {description.makes}</p>
+                </div>
+                <div className="flex">
+                    <p>Takes: {description.time}</p>
+                </div>
+            </div>
+            
+            <div className="flex flex-col">
+                <div className="flex">
+                    <p className="font-semibold text-lg">Ingredients: </p>
+                </div>
+                
                 {
                     ingredients.map((ingredient) => {
                     return (
@@ -17,20 +35,24 @@ export function RecipeComplete( {name, ingredients, steps, listId, description})
                 
                 }
             </div>
+
             
-            {
-                steps.map((step) => {
-                    return (
-                        <div className="flex justify-normal" key={step.id}>
-                            <p >{step.number}</p>
-                            <p className="px-2">{step.text}</p>
-                        </div>
-                    )
-                })
-            }
-            <p>{description.text}</p>
-            <p>{description.makes}</p>
-            <p>{description.time}</p>
+            <div>
+                <div className="flex">
+                    <p className="font-semibold text-lg">Steps:</p>
+                </div>
+                {
+                    steps.map((step) => {
+                        return (
+                            <div className="flex justify-normal gap-x-2" key={step.id}>
+                                <p>{step.number}</p>
+                                <p> {step.text}</p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+            
             
         </div>
     )
