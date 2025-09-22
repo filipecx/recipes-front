@@ -11,9 +11,9 @@ export function ListsContainer() {
   const [lists, setLists] = useState([])
   const [expandedListId, setExpandedListId] = useState(null)
   const [isAddListOpen, setAddListOpen] = useState(false)
+  
 
-  //make a get here. Shoud i get the lists and the recipes names in the same request?
-  const data = {title: "Base List", description: "" }
+  
   const fetchLists = async () => {
     try {
       const response = await Axios.get(`http://localhost:8080/recipeslist`)
@@ -24,20 +24,53 @@ export function ListsContainer() {
   }
 
   const removeList = async (listId) => {
-  const oldData = [...lists]
-  const newArray = lists.filter((list) => list.id != listId)
-  setLists(newArray)
+    const oldData = [...lists]
+    const newArray = lists.filter((list) => list.id != listId)
+    setLists(newArray)
 
-  try {
-    const response = await Axios.delete(`http://localhost:8080/recipeslist/${listId}`, {withCredentials: true})
-  } catch(e) {
-      console.error("Failed to delete list", error)
-      setLists(oldData)
+    try {
+      const response = await Axios.delete(`http://localhost:8080/recipeslist/${listId}`, {withCredentials: true})
+    } catch(e) {
+        console.error("Failed to delete list", error)
+        setLists(oldData)
+      }
+  }
+
+  const editList = async (e, listId, newListName) => {
+    e.preventDefault()
+
+    const newList = {
+      name: newListName,
+      id: listId,
+      userId: lists[0].userId
+    }
+
+    setLists(lists.map(list => {
+      if (listId === list.id) {
+        return newList;
+      } else {
+        return list;
+      }
+    }));
+    
+    
+    try {
+      const response = await Axios.put(`http://localhost:8080/recipeslist/${listId}`, 
+        {
+          name: newListName
+        },
+        {
+          withCredentials: true 
+        }
+      )
+
+    } catch (error) {
+      console.error("Could not update list", error)
     }
   }
 
   useEffect(() => {
-    setLists(lists => [...lists, data])
+    {/*setLists(lists => [...lists, data])*/}
     fetchLists()
   }, [])
 
@@ -56,7 +89,8 @@ export function ListsContainer() {
                   removeList={removeList} 
                   isExpanded={expandedListId === list.id}
                   lists={lists}
-                  setLists={setLists}     
+                  setLists={setLists}
+                  editList={editList} 
                   />           
               </div>
           )

@@ -18,7 +18,7 @@ export function AddListModal({isOpen}) {
                 withCredentials: true
             })
             //setFormData({name: ""})
-        }catch (error) {
+        } catch (error) {
            if (error.response) {
     console.error("Backend returned:", error.response.status, error.response.data);
   } else {

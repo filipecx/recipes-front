@@ -17,7 +17,7 @@ export function EditListModal ({ name, ingredients, steps, description, listId})
                                     <input type="text" value={ingredient.name} name='name' onChange={(e) => handleChange(e, index, arrayOfIngredients)}/>
                                     <label name="ingredient_quantity">Quantity</label>
                                     <input type="text" value={ingredient.quantity} name='quantity' onChange={(e) => handleChange(e, index, arrayOfIngredients)} />
-                                    <button type="button" onClick={() => removeField(index)}>Remove field</button>        
+                                    <button className={"cursor-pointer"}type="button" onClick={() => removeField(index)}>Remove field</button>        
                                 </div>
                             )
                         })
